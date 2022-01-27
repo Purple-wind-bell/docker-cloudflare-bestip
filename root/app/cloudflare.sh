@@ -21,7 +21,13 @@ cloudflare() {
   fi
 }
 
-# 从result_hosts.txt中获取bestip
+# 运行CloudflareST脚本，输出优选ip到result_hosts.txt
+CloudflareST() {
+  if[ "$RRTYPE" == "AAAA ]
+}
+
+
+# 从result_hosts.txt中获取优选ip数组
 getBestIpAddress() {
     IP_ADDRESS=$(sed -n "2,1p" /CloudflareST_linux_amd64/result_hosts.txt | awk -F, '{print $1}')
   echo $IP_ADDRESS
