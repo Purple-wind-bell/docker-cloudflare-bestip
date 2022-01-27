@@ -23,7 +23,11 @@ cloudflare() {
 
 # 运行CloudflareST脚本，输出优选ip到result_hosts.txt
 CloudflareST() {
-  if[ "$RRTYPE" == "AAAA ]
+  if [ "$RRTYPE" == "A" ]; then
+      ./CloudflareST_linux_amd64/CloudflareST -f ip.txt -o result_hosts.txt
+  elif [ "$RRTYPE" == "AAAA" ]; then
+      ./CloudflareST_linux_amd64/CloudflareST ipv6.txt -ipv6 -o result_hosts.txt
+  fi
 }
 
 
