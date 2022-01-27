@@ -53,13 +53,13 @@ fi
 echo "DNS Zone: $ZONE ($CFZoneId)"
 
 # Check we can get the current public ip address
-PublicIpAddress=$(getPublicIpAddress)
+BestIpAddress=$(getBestIpAddress)
 
 if [ ! -z ${INTERFACE+x} ]; then
-  PublicIpAddress=$(getLocalIpAddress)
+  BestIpAddress=$(getBestIpAddress)
 fi
 
-if [ "$PublicIpAddress" == "" ]; then
+if [ "$BestIpAddress" == "" ]; then
   echo "----------------------------------------------------------------"
   if [ "$RRTYPE" == "AAAA" ]; then
     echo "ERROR: Failed To Get Public IPv6 Address"
@@ -83,7 +83,7 @@ CFDnsRecordId=$(getDnsRecordId $CFZoneId $CFDnsRecordName)
 # If the dns record does not exist, create it now.
 if [ "$CFDnsRecordId" == "null" ]; then
   echo "DNS record for '$CFDnsRecordName' was not found in $ZONE zone. Creating now..."
-  CFDnsRecordId=$(createDnsRecord $CFZoneId $CFDnsRecordName $PublicIpAddress)
+  CFDnsRecordId=$(createDnsRecord $CFZoneId $CFDnsRecordName $BestIpAddress)
 
   if [ "$CFDnsRecordId" == "null" ]; then
     echo "----------------------------------------------------------------"
