@@ -7,7 +7,7 @@ DnsIpAddress=$(getDnsRecordIp $CF_ZONE_ID $CF_RECORD_ID)
 CloudflareSTResult=$(CloudflareST)
 BestIpAddress=$(getBestIpAddress)
 
-if [ "CloudflareSTResult" != "true" || "$BestIpAddress" == "" ]; then
+if [ "$CloudflareSTResult" != "true" || "$BestIpAddress" == "" ]; then
   echo "----------------------------------------------------------------"
   echo "ERROR: ip优选脚本运行失败"
   echo "----------------------------------------------------------------"
