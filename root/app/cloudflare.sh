@@ -27,7 +27,7 @@ CloudflareST() {
     ./workdir/CloudflareST -f ip.txt -o /result/result_ipv4.txt
     echo $([ -f "/result/result_ipv4.txt" ])
   elif [ "$RRTYPE" == "AAAA" ]; then
-    ./workdir/CloudflareST ipv6.txt -ipv6 -o /result/result_ipv6.txt
+    ./workdir/CloudflareST -f ipv6.txt -ipv6 -o /result/result_ipv6.txt
     echo $([ -f "/result/result_ipv6.txt" ])
   fi
 }
@@ -39,10 +39,10 @@ getBestIpAddress() {
     NUM=$IP_NUM
   fi
   if [ "$RRTYPE" == "A" ]; then
-    IP_ADDRESS = $(sed -n "$($IP_NUM + 1),1p" /result/result_ipv4.txt | awk -F, '{print $1}')
+    IP_ADDRESS = $(sed -n "$($NUM + 1),1p" /result/result_ipv4.txt | awk -F, '{print $1}')
     echo $IP_ADDRESS
   elif [ "$RRTYPE" == "AAAA" ]; then
-    IP_ADDRESS = $(sed -n "2,1p" /result/result_ipv6.txt | awk -F, '{print $1}')
+    IP_ADDRESS = $(sed -n "$($NUM + 1),1p" /result/result_ipv6.txt | awk -F, '{print $1}')
     echo $IP_ADDRESS
   fi
 }
