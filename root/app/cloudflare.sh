@@ -39,10 +39,10 @@ getBestIpAddress() {
     NUM=$IP_NUM
   fi
   if [ "$RRTYPE" == "A" ]; then
-    IP_ADDRESS = $(sed -n "$($NUM + 1),1p" /result/result_ipv4.txt | awk -F, '{print $1}')
+    IP_ADDRESS=$(sed -n "$($NUM + 1),1p" /result/result_ipv4.txt | awk -F, '{print $1}')
     echo $IP_ADDRESS
   elif [ "$RRTYPE" == "AAAA" ]; then
-    IP_ADDRESS = $(sed -n "$($NUM + 1),1p" /result/result_ipv6.txt | awk -F, '{print $1}')
+    IP_ADDRESS=$(sed -n "$($NUM + 1),1p" /result/result_ipv6.txt | awk -F, '{print $1}')
     echo $IP_ADDRESS
   fi
 }
