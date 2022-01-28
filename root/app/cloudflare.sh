@@ -42,7 +42,7 @@ getDnsRecordName() {
   if [ ! -z "$SUBDOMAIN" ]; then
     echo $SUBDOMAIN.$ZONE
   else
-    echo $ZONE
+    echo cfip.$ZONE
   fi
 }
 
