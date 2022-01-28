@@ -19,6 +19,7 @@ services:
       - ZONE=example.com
       - SUBDOMAIN=subdomain
       - PROXIED=false
+      - RRTYPE=AAAA
       - IP_NUM=1
       - SpeedTest=true
       - CloudflareSpeedTest_URL=https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.0.2/CloudflareST_linux_amd64.tar.gz
