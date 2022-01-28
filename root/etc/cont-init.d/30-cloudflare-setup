@@ -49,8 +49,9 @@ echo "----------------------------------------------------------------"
 echo '下载CloudflareST脚本'
 wget -nc $CloudflareSpeedTest_URL -O /download/CloudflareST_linux.tar.gz
 if [ -f "/download/CloudflareST_linux.tar.gz" ]; then
-  tar -zxf /download/CloudflareST_linux.tar.gz -C /CloudflareST_linux
-  chmod +777 /CloudflareST_linux -R
+  mkdir /workdir
+  tar -zxf /download/CloudflareST_linux.tar.gz -C /workdir
+  chmod +777 /workdir -R
   echo "下载完成"
   echo "解压完成"
 else

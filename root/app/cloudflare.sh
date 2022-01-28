@@ -24,10 +24,10 @@ cloudflare() {
 # 运行CloudflareST脚本，输出优选ip到/result/result_hosts.txt
 CloudflareST() {
   if [ "$RRTYPE" == "A" ]; then
-    ./CloudflareST_linux/CloudflareST -f ip.txt -o /result/result_ipv4.txt
+    ./workdir/CloudflareST -f ip.txt -o /result/result_ipv4.txt
     echo $([ -f "/result/result_ipv4.txt" ])
   elif [ "$RRTYPE" == "AAAA" ]; then
-    ./CloudflareST_linux/CloudflareST ipv6.txt -ipv6 -o /result/result_ipv6.txt
+    ./workdir/CloudflareST ipv6.txt -ipv6 -o /result/result_ipv6.txt
     echo $([ -f "/result/result_ipv6.txt" ])
   fi
 }
