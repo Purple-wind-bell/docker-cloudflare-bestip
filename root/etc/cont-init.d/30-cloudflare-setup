@@ -4,10 +4,10 @@
 
 # Load ZONE and SUBDOMAIN vars from Docker Swarm secrets, if available:
 if [ -f "$SUBDOMAIN_FILE" ]; then
-    SUBDOMAIN=$(cat $SUBDOMAIN_FILE)
+  SUBDOMAIN=$(cat $SUBDOMAIN_FILE)
 fi
 if [ -f "$ZONE_FILE" ]; then
-    ZONE=$(cat $ZONE_FILE)
+  ZONE=$(cat $ZONE_FILE)
 fi
 
 # Verify the $EMAIL and $API_KEY env variables are valid
@@ -17,18 +17,17 @@ if [ "$statusCode" != "200" ]; then
   echo "----------------------------------------------------------------"
   echo "ERROR: Invalid CloudFlare Credentials - $statusCode"
   echo "----------------------------------------------------------------"
-  if [ -z "$EMAIL" ]
-    then
-      echo "Make sure the API_KEY is correct. You can"
-      echo "get your scoped CloudFlare API Token here:"
-      echo "https://dash.cloudflare.com/profile/api-tokens"
-    else
-      echo "Make sure the EMAIL and API_KEY variables are correct. You can"
-      echo "get your CloudFlare API Key here:"
-      echo "https://www.cloudflare.com/a/profile"
-      echo
-      echo "If you are using a zone token please remove the EMAIL variable"
-      echo "from this container."
+  if [ -z "$EMAIL" ]; then
+    echo "Make sure the API_KEY is correct. You can"
+    echo "get your scoped CloudFlare API Token here:"
+    echo "https://dash.cloudflare.com/profile/api-tokens"
+  else
+    echo "Make sure the EMAIL and API_KEY variables are correct. You can"
+    echo "get your CloudFlare API Key here:"
+    echo "https://www.cloudflare.com/a/profile"
+    echo
+    echo "If you are using a zone token please remove the EMAIL variable"
+    echo "from this container."
   fi
   echo
   echo "----------------------------------------------------------------"
@@ -95,5 +94,5 @@ if [ "$CFDnsRecordId" == "null" ]; then
 fi
 
 echo "DNS Record: $CFDnsRecordName ($CFDnsRecordId)"
-echo "CF_ZONE_ID=\"$CFZoneId\" CF_RECORD_ID=\"$CFDnsRecordId\" CF_RECORD_NAME=\"$CFDnsRecordName\"" > /config/cloudflare.conf
-echo "$CRON	/etc/cont-init.d/50-ddns" > /var/spool/cron/crontabs/root
+echo "CF_ZONE_ID=\"$CFZoneId\" CF_RECORD_ID=\"$CFDnsRecordId\" CF_RECORD_NAME=\"$CFDnsRecordName\"" >/config/cloudflare.conf
+echo "$CRON	/etc/cont-init.d/50-ddns" >/var/spool/cron/crontabs/root

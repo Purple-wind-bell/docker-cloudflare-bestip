@@ -2,45 +2,44 @@
 
 cloudflare() {
   if [ -f "$API_KEY_FILE" ]; then
-      API_KEY=$(cat $API_KEY_FILE)
+    API_KEY=$(cat $API_KEY_FILE)
   fi
-  
+
   if [ -z "$EMAIL" ]; then
-      curl -sSL \
-      -H "Accept: application/json" \
-      -H "Content-Type: application/json" \
-      -H "Authorization: Bearer $API_KEY" \
-      "$@"
+    curl -sSL \
+    -H "Accept: application/json" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $API_KEY" \
+    "$@"
   else
-      curl -sSL \
-      -H "Accept: application/json" \
-      -H "Content-Type: application/json" \
-      -H "X-Auth-Email: $EMAIL" \
-      -H "X-Auth-Key: $API_KEY" \
-      "$@"
+    curl -sSL \
+    -H "Accept: application/json" \
+    -H "Content-Type: application/json" \
+    -H "X-Auth-Email: $EMAIL" \
+    -H "X-Auth-Key: $API_KEY" \
+    "$@"
   fi
 }
 
 # 运行CloudflareST脚本，输出优选ip到result_hosts.txt
 CloudflareST() {
   if [ "$RRTYPE" == "A" ]; then
-      ./CloudflareST_linux_amd64/CloudflareST -f ip.txt -o result_hosts.txt
+    ./CloudflareST_linux_amd64/CloudflareST -f ip.txt -o result_hosts.txt
   elif [ "$RRTYPE" == "AAAA" ]; then
-      ./CloudflareST_linux_amd64/CloudflareST ipv6.txt -ipv6 -o result_hosts.txt
+    ./CloudflareST_linux_amd64/CloudflareST ipv6.txt -ipv6 -o result_hosts.txt
   fi
 }
-
 
 # 从result_hosts.txt中获取优选ip,传参优选ip序号
 # 例如，查询第三个优选ip，调用 getBestIpAddress 3
 getBestIpAddress() {
-    IP_ADDRESS=$(sed -n "${$1 + 1},1p" /CloudflareST_linux_amd64/result_hosts.txt | awk -F, '{print $1}')
+  IP_ADDRESS = $(sed -n "${$1+1},1p" /CloudflareST_linux_amd64/result_hosts.txt | awk -F, '{print $1}')
   echo $IP_ADDRESS
 }
 
 # 从result_hosts.txt中获取优选ip数组，传参IP_NUM
 getBestIpAddressList() {
-    IP_ADDRESS_LIST=$(sed -n "2,$1p" /CloudflareST_linux_amd64/result_hosts.txt)
+  IP_ADDRESS_LIST=$(sed -n "2,$1p" /CloudflareST_linux_amd64/result_hosts.txt)
   echo $IP_ADDRESS_LIST
 }
 
