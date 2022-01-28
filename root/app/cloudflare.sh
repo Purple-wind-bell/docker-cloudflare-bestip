@@ -23,16 +23,24 @@ cloudflare() {
 
 # 运行CloudflareST脚本，输出优选ip到/result/result_hosts.txt
 CloudflareST() {
+  echo '开始测速'
+  echo '-------------------------------------------------'
   if [ "$SpeedTest" == "true" ]; then
     if [ "$RRTYPE" == "A" ]; then
       ./workdir/CloudflareST -f /workdir/ip.txt -o /result/result_ipv4.txt
+      echo '-------------------------------------------------'
+      echo '完成测速'
       echo $([ -f "/result/result_ipv4.txt" ])
     elif [ "$RRTYPE" == "AAAA" ]; then
       ./workdir/CloudflareST -f /workdir/ipv6.txt -ipv6 -o /result/result_ipv6.txt
       echo $([ -f "/result/result_ipv6.txt" ])
+      echo '-------------------------------------------------'
+      echo '完成测速'
     fi
   else
     echo "true"
+    echo '-------------------------------------------------'
+    echo '根据设置跳过测速'
   fi
 
 }
