@@ -47,29 +47,27 @@ echo "DNS Zone: $ZONE ($CFZoneId)"
 echo
 echo "----------------------------------------------------------------"
 echo '下载CloudflareST脚本'
-wget -nc https://github.com/XIU2/CloudflareSpeedTest/releases/download/v$CloudflareST_Version/CloudflareST_linux_amd64.tar.gz
-tar -zxvf CloudflareST_linux_amd64.tar.gz
-echo '下载完成'
+wget -nc $CloudflareSpeedTest_URL -O /CloudflareST_linux.tar.gz
+if [ -f /CloudflareST_linux.tar.gz ]; then
+  tar -zxvf CloudflareST_linux.tar.gz
+  echo "下载完成"
+  echo "解压完成"
+else
+  echo "下载失败，请重新部署容器"
+fi
 echo "----------------------------------------------------------------"
 echo
 
 # 优选cloudflare ip
-CloudflareST
+echo "----------------------------------------------------------------"
+echo "必须无代理环境运行此docker镜像，如宿主机需要代理环境，可以macvlan模式运行"
+echo "----------------------------------------------------------------"
+CloudflareSTResult=$(CloudflareST)
 BestIpAddress=$(getBestIpAddress)
 
-if [ "$BestIpAddress" == "" ]; then
+if [ "CloudflareSTResult" != "true" || "$BestIpAddress" == "" ]; then
   echo "----------------------------------------------------------------"
-  if [ "$RRTYPE" == "AAAA" ]; then
-    echo "ERROR: Failed To Get Public IPv6 Address"
-    echo "----------------------------------------------------------------"
-    echo "You must be running Docker with IPv6 support enabled or this"
-    echo "container with host networking enabled."
-    echo
-    echo "Add '--net=host' to your docker run command or if using"
-    echo "docker-compose add 'network_mode: host' to this service."
-  else
-    echo "ERROR: Failed To Get Public IPv4 Address"
-  fi
+  echo "ERROR: ip优选脚本运行失败"
   echo "----------------------------------------------------------------"
   exit 1
 fi

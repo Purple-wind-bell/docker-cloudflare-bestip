@@ -4,25 +4,26 @@
 . /config/cloudflare.conf
 
 DnsIpAddress=$(getDnsRecordIp $CF_ZONE_ID $CF_RECORD_ID)
+CloudflareSTResult=$(CloudflareST)
+BestIpAddress=$(getBestIpAddress)
 
-if [ ! -z ${CUSTOM_LOOKUP_CMD+x} ]; then
-  CurrentIpAddress=$(getCustomIpAddress)
-elif [ ! -z ${INTERFACE+x} ]; then
-  CurrentIpAddress=$(getLocalIpAddress)
-else
-  CurrentIpAddress=$(getPublicIpAddress)
+if [ "CloudflareSTResult" != "true" || "$BestIpAddress" == "" ]; then
+  echo "----------------------------------------------------------------"
+  echo "ERROR: ip优选脚本运行失败"
+  echo "----------------------------------------------------------------"
+  exit 1
 fi
 
-if [ "$CurrentIpAddress" != "$DnsIpAddress" ]; then
-  echo "Updating CloudFlare DNS record $CF_RECORD_NAME from $DnsIpAddress to $CurrentIpAddress..."
-  update=$(updateDnsRecord $CF_ZONE_ID $CF_RECORD_ID $CF_RECORD_NAME $CurrentIpAddress)
+if [ "$BestIpAddress" != "$DnsIpAddress" ]; then
+  echo "Updating CloudFlare DNS record $CF_RECORD_NAME from $DnsIpAddress to $BestIpAddress..."
+  update=$(updateDnsRecord $CF_ZONE_ID $CF_RECORD_ID $CF_RECORD_NAME $BestIpAddress)
 
   if [ "$update" == "null" ]; then
-    echo "ERROR: Failed to update CloudFlare DNS record $CF_RECORD_NAME from $DnsIpAddress to $CurrentIpAddress"
+    echo "ERROR: Failed to update CloudFlare DNS record $CF_RECORD_NAME from $DnsIpAddress to $BestIpAddress"
   else
-    echo "CloudFlare DNS record $CF_RECORD_NAME ($CurrentIpAddress) updated successfully."
+    echo "CloudFlare DNS record $CF_RECORD_NAME ($BestIpAddress) updated successfully."
   fi
-  
+
 else
   echo "No DNS update required for $CF_RECORD_NAME ($DnsIpAddress)."
 fi

@@ -21,21 +21,32 @@ cloudflare() {
   fi
 }
 
-# 运行CloudflareST脚本，输出优选ip到result_hosts.txt
+# 运行CloudflareST脚本，输出优选ip到/result/result_hosts.txt
 CloudflareST() {
   if [ "$RRTYPE" == "A" ]; then
-    ./CloudflareST_linux_amd64/CloudflareST -f ip.txt -o result_hosts.txt
+    ./CloudflareST_linux/CloudflareST -f ip.txt -o /result/result_ipv4.txt
+    echo $([ -f /result/result_ipv4.txt ])
   elif [ "$RRTYPE" == "AAAA" ]; then
-    ./CloudflareST_linux_amd64/CloudflareST ipv6.txt -ipv6 -o result_hosts.txt
+    ./CloudflareST_linux/CloudflareST ipv6.txt -ipv6 -o /result/result_ipv6.txt
+    echo $([ -f /result/result_ipv6.txt ])
+  fi
+}
+# 从/result/result_hosts.txt中获取优选ip,默认第一个最快的ip,通过IP_NUM参数设置选择第几个ip
+getBestIpAddress() {
+  NUM=1
+  if (($IP_NUM <= 10)); then
+    NUM=$IP_NUM
+  fi
+  if [ "$RRTYPE" == "A" ]; then
+    IP_ADDRESS = $(sed -n "$($IP_NUM + 1),1p" /result/result_ipv4.txt | awk -F, '{print $1}')
+    echo $IP_ADDRESS
+  elif [ "$RRTYPE" == "AAAA" ]; then
+    IP_ADDRESS = $(sed -n "2,1p" /result/result_ipv6.txt | awk -F, '{print $1}')
+    echo $IP_ADDRESS
   fi
 }
 
-# 从result_hosts.txt中获取优选ip,默认第一个最快的ip
-getBestIpAddress() {
-  IP_ADDRESS = $(sed -n "2,1p" /CloudflareST_linux_amd64/result_hosts.txt | awk -F, '{print $1}')
-  echo $IP_ADDRESS
-}
-
+# 默认子域名为 cfip
 getDnsRecordName() {
   if [ ! -z "$SUBDOMAIN" ]; then
     echo $SUBDOMAIN.$ZONE
