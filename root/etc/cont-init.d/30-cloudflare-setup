@@ -43,7 +43,6 @@ fi
 echo "DNS Zone: $ZONE ($CFZoneId)"
 
 # 下载CloudflareST脚本
-echo
 echo "----------------------------------------------------------------"
 echo '下载CloudflareST脚本'
 wget -nc $CloudflareSpeedTest_URL -O /download/CloudflareST_linux.tar.gz
@@ -57,16 +56,15 @@ else
   echo "下载失败，请重新部署容器"
 fi
 echo "----------------------------------------------------------------"
-echo
 
 # 优选cloudflare ip
 echo "----------------------------------------------------------------"
 echo "必须无代理环境运行此docker镜像，如宿主机需要代理环境，可以macvlan模式运行"
 echo "----------------------------------------------------------------"
-CloudflareSTResult=$(CloudflareST)
+CloudflareST
 BestIpAddress=$(getBestIpAddress)
 
-if [ "$CloudflareSTResult" == "false" || "$BestIpAddress" == "" ]; then
+if [ "$BestIpAddress" == "" ]; then
   echo "----------------------------------------------------------------"
   echo "ERROR: ip优选脚本运行失败"
   echo "----------------------------------------------------------------"
