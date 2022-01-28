@@ -35,7 +35,6 @@ if [ "$CFZoneId" == "null" ]; then
   echo "----------------------------------------------------------------"
   echo "Make sure the ZONE variable is correct and the domain exists"
   echo "in your CloudFlare account. You can add a new domain here:"
-  echo
   echo "https://www.cloudflare.com/a/add-site"
   echo "----------------------------------------------------------------"
   exit 1
