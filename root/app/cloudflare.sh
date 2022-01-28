@@ -25,10 +25,10 @@ cloudflare() {
 CloudflareST() {
   if [ "$RRTYPE" == "A" ]; then
     sh /workdir/CloudflareST -f ip.txt -o /result/result_ipv4.txt
-    echo $([ -f "/result/result_ipv4.txt" ])
+    # echo $([ -f "/result/result_ipv4.txt" ])
   elif [ "$RRTYPE" == "AAAA" ]; then
     sh /workdir/CloudflareST -f ipv6.txt -ipv6 -o /result/result_ipv6.txt
-    echo $([ -f "/result/result_ipv6.txt" ])
+    # echo $([ -f "/result/result_ipv6.txt" ])
   fi
 }
 
