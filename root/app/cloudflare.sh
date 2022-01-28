@@ -25,17 +25,17 @@ cloudflare() {
 CloudflareST() {
   if [ "$RRTYPE" == "A" ]; then
     ./workdir/CloudflareST -f ip.txt -o /result/result_ipv4.txt
-    echo $([ -f "/result/result_ipv4.txt" ])
+    echo $(-f "/result/result_ipv4.txt")
   elif [ "$RRTYPE" == "AAAA" ]; then
     ./workdir/CloudflareST -f ipv6.txt -ipv6 -o /result/result_ipv6.txt
-    echo $([ -f "/result/result_ipv6.txt" ])
+    echo $(-f "/result/result_ipv6.txt")
   fi
 }
 
 # 从/result/result_hosts.txt中获取优选ip,默认第一个最快的ip,通过IP_NUM参数设置选择第几个ip
 getBestIpAddress() {
   NUM=1
-  if (($IP_NUM <= 10)); then
+  if ($IP_NUM <= 10); then
     NUM=$IP_NUM
   fi
   if [ "$RRTYPE" == "A" ]; then
