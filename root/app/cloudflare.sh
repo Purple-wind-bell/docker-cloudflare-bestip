@@ -23,13 +23,18 @@ cloudflare() {
 
 # 运行CloudflareST脚本，输出优选ip到/result/result_hosts.txt
 CloudflareST() {
-  if [ "$RRTYPE" == "A" ]; then
-    ./workdir/CloudflareST -f /workdir/ip.txt -o /result/result_ipv4.txt
-    echo $([ -f "/result/result_ipv4.txt" ])
-  elif [ "$RRTYPE" == "AAAA" ]; then
-    ./workdir/CloudflareST -f /workdir/ipv6.txt -ipv6 -o /result/result_ipv6.txt
-    echo $([ -f "/result/result_ipv6.txt" ])
+  if [ "$SpeedTest" == "true" ]; then
+    if [ "$RRTYPE" == "A" ]; then
+      ./workdir/CloudflareST -f /workdir/ip.txt -o /result/result_ipv4.txt
+      echo $([ -f "/result/result_ipv4.txt" ])
+    elif [ "$RRTYPE" == "AAAA" ]; then
+      ./workdir/CloudflareST -f /workdir/ipv6.txt -ipv6 -o /result/result_ipv6.txt
+      echo $([ -f "/result/result_ipv6.txt" ])
+    fi
+  else
+    echo "true"
   fi
+
 }
 
 # 从/result/result_hosts.txt中获取优选ip,默认第一个最快的ip,通过IP_NUM参数设置选择第几个ip

@@ -4,10 +4,10 @@
 . /config/cloudflare.conf
 
 DnsIpAddress=$(getDnsRecordIp $CF_ZONE_ID $CF_RECORD_ID)
-CloudflareST
+CloudflareSTResult=$(CloudflareST)
 BestIpAddress=$(getBestIpAddress)
 
-if [ "$BestIpAddress" == "" ]; then
+if [ "$CloudflareSTResult" == "false" || "$BestIpAddress" == "" ]; then
   echo "----------------------------------------------------------------"
   echo "ERROR: ip优选脚本运行失败"
   echo "----------------------------------------------------------------"
