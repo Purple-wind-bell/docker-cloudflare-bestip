@@ -33,7 +33,7 @@ CloudflareST() {
 # 从result_hosts.txt中获取优选ip,传参优选ip序号
 # 例如，查询第三个优选ip，调用 getBestIpAddress 3
 getBestIpAddress() {
-  IP_ADDRESS = $(sed -n "${$1+1},1p" /CloudflareST_linux_amd64/result_hosts.txt | awk -F, '{print $1}')
+  IP_ADDRESS = $(sed -n "$($1+1),1p" /CloudflareST_linux_amd64/result_hosts.txt | awk -F, '{print $1}')
   echo $IP_ADDRESS
 }
 
@@ -43,8 +43,11 @@ getBestIpAddressList() {
   echo $IP_ADDRESS_LIST
 }
 
-getDnsRecordName() {
+getDnsRecordNameList() {
+  DnsRecordNameList=""
   if [ ! -z "$SUBDOMAIN" ]; then
+    for (i=0;i<=$IP_NUM;i++)
+
     echo $SUBDOMAIN.$ZONE
   else
     echo cfip.$ZONE
