@@ -24,6 +24,7 @@ services:
       - CloudflareSpeedTest_URL=https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.0.2/CloudflareST_linux_amd64.tar.gz
     volumes:
       - ./data/result:/result
+      - ./data/temp:/temp
     networks:
       macvlan-net:
         ipv4_address: 192.168.31.30
@@ -45,6 +46,7 @@ networks:
 - `SpeedTest` - 是否启用内置的优选脚本，默认为 true，设置为 false 时用于配合`./data/result:/result`实现多容器共享优选 ip 文件。
 - `CloudflareSpeedTest_URL` - cloudflare 优选 ip 的脚本下载链接，默认 x86_64，详见[XIU2/CloudflareSpeedTest](https://github.com/XIU2/CloudflareSpeedTest)，不知道怎么设置最新发布地址。。。。。。
 - `./data/result:/result` - 映射容器内测速结果，方便多容器共享，配合 `SpeedTest` 参数使用。
+- `./data/temp:/temp` - 下载存放 CloudflareST_linux.tar.gz 文件，也可以手动下载重命名，放到目录下解决 github 下载问题，或者使用可以访问的下载链接`CloudflareSpeedTest_URL`。
 - `ipv4_address` - macvlan 模式指定容器 ip。
 - `macvlan-net` - macvlan 网络名称，需要另外设置，相关信息搜索`docker macvlan`关键词。
 

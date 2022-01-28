@@ -47,9 +47,10 @@ echo "DNS Zone: $ZONE ($CFZoneId)"
 echo
 echo "----------------------------------------------------------------"
 echo '下载CloudflareST脚本'
-wget -nc $CloudflareSpeedTest_URL -O /CloudflareST_linux.tar.gz
-if [ -f /CloudflareST_linux.tar.gz ]; then
-  tar -zxvf CloudflareST_linux.tar.gz
+wget -nc $CloudflareSpeedTest_URL -O /temp/CloudflareST_linux.tar.gz
+if [ -f "/CloudflareST/CloudflareST_linux.tar.gz" ]; then
+  tar -zxf /CloudflareST/CloudflareST_linux.tar.gz -C /
+  chmod +777 /CloudflareST_linux -R
   echo "下载完成"
   echo "解压完成"
 else
