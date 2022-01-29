@@ -9,7 +9,7 @@ BestIpAddress=$(getBestIpAddress)
 
 if [ "$BestIpAddress" == "" ]; then
   echo "----------------------------------------------------------------"
-  echo "ERROR: ip优选脚本运行失败"
+  echo "ERROR: ip优选脚本运行失败，未获得优选ip"
   echo "----------------------------------------------------------------"
   exit 1
 fi
