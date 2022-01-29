@@ -1,2 +1,3 @@
-docker build -t zfl666/cloudflare-bestip-ddns:latest . && \
-docker push zfl666/cloudflare-bestip-ddns:latest
+git pull &&
+    docker build -t zfl666/cloudflare-bestip-ddns:latest . &&
+    docker push zfl666/cloudflare-bestip-ddns:latest
