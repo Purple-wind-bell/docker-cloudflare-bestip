@@ -45,10 +45,10 @@ CloudflareST() {
 # 从/result/result_hosts.txt中获取优选ip,默认第一个最快的ip,通过IP_NUM参数设置选择第几个ip
 getBestIpAddress() {
   if [ "$RRTYPE" == "A" ]; then
-    IP_ADDRESS=$(sed -n "$($IP_NUM + 1),1p" /result/result_ipv4.txt | awk -F, '{print $1}')
+    IP_ADDRESS=$(sed -n "$(($IP_NUM + 1)),1p" /result/result_ipv4.txt | awk -F, '{print $1}')
     echo $IP_ADDRESS
   elif [ "$RRTYPE" == "AAAA" ]; then
-    IP_ADDRESS=$(sed -n "$($IP_NUM + 1),1p" /result/result_ipv6.txt | awk -F, '{print $1}')
+    IP_ADDRESS=$(sed -n "$(($IP_NUM + 1)),1p" /result/result_ipv6.txt | awk -F, '{print $1}')
     echo $IP_ADDRESS
   fi
 }
