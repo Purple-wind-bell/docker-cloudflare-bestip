@@ -27,12 +27,12 @@ CloudflareST() {
   echo '-------------------------------------------------'
   if [ "$SpeedTest" == "true" ]; then
     if [ "$RRTYPE" == "A" ]; then
-      ./workdir/CloudflareST -f /workdir/ip.txt -o /result/result_ipv4.txt
-      echo '-------------------------------------------------'
+      ./workdir/CloudflareST -f /workdir/ip.txt -o /result/result_ipv4.txt &&
+        echo '-------------------------------------------------'
       echo '完成ipv4测速'
     elif [ "$RRTYPE" == "AAAA" ]; then
-      ./workdir/CloudflareST -f /workdir/ipv6.txt -ipv6 -o /result/result_ipv6.txt
-      echo '-------------------------------------------------'
+      ./workdir/CloudflareST -f /workdir/ipv6.txt -ipv6 -o /result/result_ipv6.txt &&
+        echo '-------------------------------------------------'
       echo '完成ipv6测速'
     fi
   else
