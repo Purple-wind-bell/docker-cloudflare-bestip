@@ -26,13 +26,16 @@ CloudflareST() {
   echo '------开始测速------'
   echo '-------------------------------------------------'
   if [ "$SpeedTest" == "true" ]; then
+    cd /workdir
+    echo '-------------------------------------------------'
+    echo '进入工作目录'
     if [ "$RRTYPE" == "A" ]; then
-      ./workdir/CloudflareST -f /workdir/ip.txt -o /result/result_ipv4.txt &&
-        echo '-------------------------------------------------'
+      ./CloudflareST -f ip.txt -o /result/result_ipv4.txt
+      echo '-------------------------------------------------'
       echo '完成ipv4测速'
     elif [ "$RRTYPE" == "AAAA" ]; then
-      ./workdir/CloudflareST -f /workdir/ipv6.txt -ipv6 -o /result/result_ipv6.txt &&
-        echo '-------------------------------------------------'
+      ./CloudflareST -f ipv6.txt -ipv6 -o /result/result_ipv6.txt
+      echo '-------------------------------------------------'
       echo '完成ipv6测速'
     fi
   else
@@ -86,7 +89,6 @@ createDnsRecord() {
   if [[ "$PROXIED" != "true" && "$PROXIED" != "false" ]]; then
     PROXIED="false"
   fi
-
   cloudflare -X POST -d "{\"type\": \"$RRTYPE\",\"name\":\"$2\",\"content\":\"$3\",\"proxied\":$PROXIED,\"ttl\":1 }" "$CF_API/zones/$1/dns_records" | jq -r '.result.id'
 }
 
@@ -94,7 +96,6 @@ updateDnsRecord() {
   if [[ "$PROXIED" != "true" && "$PROXIED" != "false" ]]; then
     PROXIED="false"
   fi
-
   cloudflare -X PATCH -d "{\"type\": \"$RRTYPE\",\"name\":\"$3\",\"content\":\"$4\",\"proxied\":$PROXIED }" "$CF_API/zones/$1/dns_records/$2" | jq -r '.result.id'
 }
 
