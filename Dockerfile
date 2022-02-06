@@ -10,6 +10,6 @@ CRON="0 */3 * * *" \
 CloudflareSpeedTest_URL=https://download.fastgit.org/XIU2/CloudflareSpeedTest/releases/download/v2.0.2/CloudflareST_linux_amd64.tar.gz \
 IP_NUM=1 \
 SpeedTest=true \
-SpeedTestUrl=https://cdn-frantech.zfl-site.top/test/solar.dss
+SpeedTestUrl=https://speed.acfun-win.workers.dev/100mb.test
 
 COPY root /
