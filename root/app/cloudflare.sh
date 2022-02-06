@@ -30,11 +30,11 @@ CloudflareST() {
     echo '-------------------------------------------------'
     echo '进入工作目录'
     if [ "$RRTYPE" == "A" ]; then
-      ./CloudflareST -f ip.txt -o /result/result_ipv4.txt
+      ./CloudflareST -f ip.txt -url $SpeedTestUrl -o /result/result_ipv4.txt
       echo '-------------------------------------------------'
       echo '完成ipv4测速'
     elif [ "$RRTYPE" == "AAAA" ]; then
-      ./CloudflareST -f ipv6.txt -ipv6 -o /result/result_ipv6.txt
+      ./CloudflareST -f ipv6.txt -url $SpeedTestUrl -ipv6 -o /result/result_ipv6.txt
       echo '-------------------------------------------------'
       echo '完成ipv6测速'
     fi
