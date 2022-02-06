@@ -42,7 +42,6 @@ CloudflareST() {
     echo '-------------------------------------------------'
     echo '根据设置跳过测速'
   fi
-
 }
 
 # 从/result/result_hosts.txt中获取优选ip,默认第一个最快的ip,通过IP_NUM参数设置选择第几个ip
