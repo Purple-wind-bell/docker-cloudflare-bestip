@@ -11,8 +11,8 @@ If you prefer to use [docker-compose.yml](https://docs.docker.com/compose/):
 ```
 version: '3'
 services:
-  cloudflare-ddns:
-    image: oznu/cloudflare-ddns:latest
+  cloudflare-bestip:
+    image: zfl666/cloudflare-bestip:latest
     restart: always
     environment:
       - API_KEY=xxxxxxx
