@@ -21,7 +21,7 @@ cloudflare() {
   fi
 }
 
-# 运行CloudflareST脚本，输出优选ip到/result/result_hosts.txt
+# 运行CloudflareST脚本，输出优选ip到/result/result_ipv4.txt
 CloudflareST() {
   echo '------开始测速------'
   echo '-------------------------------------------------'
