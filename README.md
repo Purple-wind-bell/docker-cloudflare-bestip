@@ -22,7 +22,7 @@ services:
       - RRTYPE=AAAA
       - IP_NUM=1
       - SpeedTest=true
-      - CloudflareSpeedTest_URL=https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.0.2/CloudflareST_linux_amd64.tar.gz
+      - CloudflareSpeedTest_URL=https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.0.3/CloudflareST_linux_amd64.tar.gz
       - SpeedTestUrl=https://speed.acfun-win.workers.dev/100mb.test
     volumes:
       - ./data/result:/result
