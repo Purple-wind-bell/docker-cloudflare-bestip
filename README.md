@@ -22,7 +22,7 @@ services:
       - RRTYPE=AAAA
       - IP_NUM=1
       - SpeedTest=true
-      - CloudflareSpeedTest_URL=https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.0.3/CloudflareST_linux_amd64.tar.gz
+      - CloudflareSpeedTest_URL=https://download.fastgit.org/XIU2/CloudflareSpeedTest/releases/latest/download/CloudflareST_linux_amd64.tar.gz
       - SpeedTestUrl=https://speed.acfun-win.workers.dev/100mb.test
     volumes:
       - ./data/result:/result
@@ -45,11 +45,11 @@ networks:
   - `SUBDOMAIN_FILE` - Path to load your CloudFlare DNS Subdomain from (e.g. a Docker secret). _If both `SUBDOMAIN_FILE` and `SUBDOMAIN` are specified, `SUBDOMAIN_FILE` takes precedence._
 - `IP_NUM=1` - 内置脚本支持优选 10 个 ip，此参数可以设置选择第几个，配合多容器实现更新多个优选 ip。
 - `SpeedTest` - 是否启用内置的优选脚本，默认为 true，设置为 false 时用于配合`./data/result:/result`实现多容器共享优选 ip 文件。
-- `CloudflareSpeedTest_URL` - cloudflare 优选 ip 的脚本下载链接，默认 x86_64，详见[XIU2/CloudflareSpeedTest](https://github.com/XIU2/CloudflareSpeedTest)，不知道怎么设置最新发布地址。。。。。。
+- `CloudflareSpeedTest_URL` - cloudflare 优选 ip 的脚本下载链接，默认 x86_64，详见[XIU2/CloudflareSpeedTest](https://github.com/XIU2/CloudflareSpeedTest)，默认最新脚本
 - `./data/result:/result` - 映射容器内测速结果，方便多容器共享，配合 `SpeedTest` 参数使用。
 - `ipv4_address` - macvlan 模式指定容器 ip。
 - `macvlan-net` - macvlan 网络名称，需要另外设置，相关信息搜索`docker macvlan`关键词。
-- `SpeedTestUrl` - 测速文件url
+- `SpeedTestUrl` - 测速文件 url
 
 ## Optional Parameters
 

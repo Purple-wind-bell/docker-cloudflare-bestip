@@ -21,6 +21,28 @@ cloudflare() {
   fi
 }
 
+DownloadCloudflareSTFile() {
+  # 下载CloudflareST脚本
+  echo "----------------------------------------------------------------"
+  echo '下载CloudflareST脚本'
+  wget -nc $CloudflareSpeedTest_URL -O /CloudflareST_linux.tar.gz
+  echo "下载完成"
+  if [ -f "/CloudflareST_linux.tar.gz" ]; then
+    if [ -d "/workdir" ]; then
+      echo "directory \"/workdir\" exists"
+    else
+      echo "create directory \"/workdir\""
+      mkdir /workdir
+    fi
+    tar -zxf /CloudflareST_linux.tar.gz -C /workdir
+    chmod +777 /workdir -R
+    echo "解压完成"
+  else
+    echo "下载失败，请重新部署容器"
+    exit 1
+  fi
+}
+
 # 运行CloudflareST脚本，输出优选ip到/result/result_ipv4.txt
 CloudflareST() {
   echo '------开始测速------'
