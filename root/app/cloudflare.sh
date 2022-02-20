@@ -25,7 +25,7 @@ DownloadCloudflareSTFile() {
   # 下载CloudflareST脚本
   echo "----------------------------------------------------------------"
   echo '下载CloudflareST脚本'
-  wget -nc $CloudflareSpeedTest_URL -O /CloudflareST_linux.tar.gz
+  wget $CloudflareSpeedTest_URL -O /CloudflareST_linux.tar.gz
   echo "下载完成"
   if [ -f "/CloudflareST_linux.tar.gz" ]; then
     if [ -d "/workdir" ]; then
@@ -86,7 +86,7 @@ getDnsRecordName() {
   if [ ! -z "$SUBDOMAIN" ]; then
     echo $SUBDOMAIN.$ZONE
   else
-    echo cfip.$ZONE
+    echo cfip1.$ZONE
   fi
 }
 
